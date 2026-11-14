@@ -20,6 +20,14 @@ export async function connectToMongoDB() {
 app.use(cors());
 app.use(express.json());
 
+// Database Connection
+const mongoClient = await connectToMongoDB();
+ 
+const db = mongoClient.db("studiospace");
+const usersCollection = db.collection("users");
+const studioCollection = db.collection("studios");
+const bookingCollection = db.collection("bookings");
+
 
 app.get("/", (req, res) => {
   res.send({ message: "Server is running fine!" });
