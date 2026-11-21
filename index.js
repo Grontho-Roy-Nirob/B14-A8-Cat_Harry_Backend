@@ -107,6 +107,7 @@ app.patch("/my-bookings/:id", async (req, res) => {
   res.json(result);
 });
 
+// Delete a specific booking by its ID.
 app.delete("/my-bookings/:id", async (req, res) => {
   const { id } = req.params;
   const result = await bookingCollection.deleteOne({ _id: new ObjectId(id) });
