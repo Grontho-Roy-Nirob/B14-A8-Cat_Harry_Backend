@@ -44,6 +44,7 @@ app.get("/featured-studios", async (req, res) => {
   res.send(result);
 });
 
+// Get all studio listings added by a specific owner using their email.
 app.get("/my-listings/:email", async (req, res) => {
   const { email } = req.params;
   const result = await studioCollection.find({ ownerEmail: email }).toArray();
