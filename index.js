@@ -88,6 +88,8 @@ app.post("/booking", async (req, res) => {
   res.send(result);
 });
 
+
+// Get all bookings made by a specific user using their email.
 app.get("/my-bookings/:email", async (req, res) => {
   const { email } = req.params;
   const result = await bookingCollection.find({ email: email }).toArray();
