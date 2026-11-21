@@ -71,6 +71,7 @@ app.patch("/studio/:id", async (req, res) => {
   res.json(result);
 });
 
+// Delete a studio from the database by its ID.
 app.delete("/studio/:id", async (req, res) => {
   const { id } = req.params;
   const result = await studioCollection.deleteOne({
