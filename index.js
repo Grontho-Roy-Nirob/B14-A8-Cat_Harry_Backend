@@ -3,7 +3,7 @@ import { MongoClient, ObjectId } from "mongodb";
 import cors from "cors";
 import "dotenv/config";
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 const client = new MongoClient(process.env.MONGODB_URI);
 
@@ -21,7 +21,7 @@ app.use(cors());
 app.use(express.json());
 
 const mongoClient = await connectToMongoDB();
-const db = mongoClient.db("studiospace");
+const db = mongoClient.db(process.env.DB_NAME || "studiospace");
 const studioCollection = db.collection("studios");
 const bookingCollection = db.collection("bookings");
 
