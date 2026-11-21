@@ -9,8 +9,8 @@
 - `index.js` connects to MongoDB via top-level `await` **and** calls `app.listen()` at import time. Importing `app` from another script requires a working `MONGODB_URI` and starts a server on port 8000; there is no lazy connection or `import.meta.main` guard.
 - Native `mongodb` driver (no Mongoose). Database `studiospace` and collections `studios`, `bookings` are referenced in `index.js`; `ObjectId` is already imported.
 - Handlers are intentionally thin: they pass `req.body` straight to MongoDB and use `new ObjectId(id)` inline. Don't add validation/normalization helpers or error middleware.
-- Routes are root-level (no `/api` prefix): `POST /add-studio`, `GET /studios`, `GET /featured-studios`, `GET /my-listings/:email`, `GET|PATCH|DELETE /studio/:id`, `POST /booking`, `GET /my-bookings/:email`, `PATCH|DELETE /my-bookings/:id`.
-- JWT auth is intentionally absent. `my-listings` filters by `ownerEmail` from the URL; bookings filter by `email` from the URL. Cancel by PATCHing `{ "status": "Cancelled" }` to `/my-bookings/:id`.
+- Routes are root-level (no `/api` prefix): `POST /add-studio`, `GET /studios`, `GET /featured-studios`, `GET /my-listings/:email`, `GET|PATCH|DELETE /studio/:id`, `POST /booking`, `GET /my-bookings/:email`, `PATCH /my-bookings/:id`, `PATCH /my-bookings/:id/confirm`, `DELETE /my-bookings/:id`.
+- JWT auth is intentionally absent. `my-listings` filters by `ownerEmail` from the URL; bookings filter by `email` from the URL. Cancel by PATCHing `{ "status": "Cancelled" }` to `/my-bookings/:id`; confirm via `PATCH /my-bookings/:id/confirm`.
 
 ## Environment quirks
 - `.env` exists locally (gitignored) and already holds the Atlas URI — never commit it or inline credentials in source.

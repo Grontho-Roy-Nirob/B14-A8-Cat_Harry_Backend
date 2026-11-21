@@ -107,6 +107,17 @@ app.patch("/my-bookings/:id", async (req, res) => {
   res.json(result);
 });
 
+// Confirm a booking by setting its status to "Confirmed".
+app.patch("/my-bookings/:id/confirm", async (req, res) => {
+  const { id } = req.params;
+  const data = { status: "Confirmed" };
+  const result = await bookingCollection.updateOne(
+    { _id: new ObjectId(id) },
+    { $set: data },
+  );
+  res.json(result);
+});
+
 // Delete a specific booking by its ID.
 app.delete("/my-bookings/:id", async (req, res) => {
   const { id } = req.params;
