@@ -80,6 +80,7 @@ app.delete("/studio/:id", async (req, res) => {
   res.json(result);
 });
 
+// Add a new booking to the database.
 app.post("/booking", async (req, res) => {
   const data = req.body;
   data.status = "Pending";
