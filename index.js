@@ -38,6 +38,7 @@ app.get("/studios", async (req, res) => {
   res.send(result);
 });
 
+// Get the first 5 studios from the database as featured studios.
 app.get("/featured-studios", async (req, res) => {
   const result = await studioCollection.find().limit(5).toArray();
   res.send(result);
