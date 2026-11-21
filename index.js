@@ -51,6 +51,7 @@ app.get("/my-listings/:email", async (req, res) => {
   res.send(result);
 });
 
+// Get a single studio's details by its ID.
 app.get("/studio/:id", async (req, res) => {
   const { id } = req.params;
   const result = await studioCollection.findOne({
