@@ -60,6 +60,7 @@ app.get("/studio/:id", async (req, res) => {
   res.send(result);
 });
 
+// Update a studio's information by its ID.
 app.patch("/studio/:id", async (req, res) => {
   const { id } = req.params;
   const data = req.body;
