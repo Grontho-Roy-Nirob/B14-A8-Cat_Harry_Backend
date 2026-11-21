@@ -32,6 +32,7 @@ app.post("/add-studio", async (req, res) => {
   res.send(result);
 });
 
+// Get all studios from the database.
 app.get("/studios", async (req, res) => {
   const result = await studioCollection.find().toArray();
   res.send(result);
