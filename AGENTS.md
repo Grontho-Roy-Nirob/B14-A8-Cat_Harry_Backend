@@ -13,7 +13,8 @@
 - JWT auth is intentionally absent. `my-listings` filters by `ownerEmail` from the URL; bookings filter by `email` from the URL. Cancel by PATCHing `{ "status": "Cancelled" }` to `/my-bookings/:id`; confirm via `PATCH /my-bookings/:id/confirm`.
 
 ## Environment quirks
-- `.env` exists locally (gitignored) and already holds the Atlas URI — never commit it or inline credentials in source.
-- Image URLs are supplied by the frontend and stored as-is; there is no backend image-upload endpoint.
-- `PORT`, `DB_NAME`, and `FRONTEND_URL` in `.env` are unused: port and db name are hardcoded in `index.js`, and CORS is wide open (`app.use(cors())`).
+- `.env` exists locally (gitignored) and already holds the Atlas `MONGODB_URI` — never commit it or inline credentials in source.
+- `index.js` reads `process.env.PORT` (fallback `8000`) and `process.env.DB_NAME` (fallback `"studiospace"`). `.env` does **not** define `DB_NAME` (it defines `MONGODB_DB`), so the database name always resolves to `studiospace` and `MONGODB_DB` is ignored.
+- `.env` also has `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `NEXT_PUBLIC_APP_URL`, `NEXT_PUBLIC_API_URL` — leftovers from the frontend/auth setup; none are used by this backend (no auth middleware exists).
+- CORS is wide open (`app.use(cors())`); no `FRONTEND_URL` allowlist is read.
 - `dotenv/config` is imported at the top of `index.js`; don't add a redundant `dotenv.config()` there.
